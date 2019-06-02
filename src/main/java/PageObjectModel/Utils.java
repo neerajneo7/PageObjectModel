@@ -13,6 +13,7 @@ import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
+import javax.xml.bind.Element;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -21,15 +22,17 @@ import java.util.Date;
 public class Utils extends BasePage {
 
     //Take screenshot of the browser
-    public static void screenshotOfTheBrowser(String nameOfScreenshot) {
+    public static void screenshotOfTheBrowser(String screenshotName) {
         //This takes the screen shot of the browser and will store the image in specified location
         try {
             TakesScreenshot ts = (TakesScreenshot) driver;
             File source = ts.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(source, new File("./Screenshots/" + nameOfScreenshot + ".png"));
+            //+screenshotName will give the different name everytime the screen shot has been captured so it is
+            //different name everytime to overcome the overwriting the shots.
+            FileUtils.copyFile(source, new File("./Screenshots/" + screenshotName+ ".png"));
             System.out.println("Screenshot taken");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Exception while taking screenshot" + e.getMessage());
         }
     }
 
@@ -42,6 +45,8 @@ public class Utils extends BasePage {
             e.printStackTrace();
         }
     }
+
+
 
     //Date stamp short
     public static void dateStampShort()
@@ -79,8 +84,9 @@ public class Utils extends BasePage {
     public static void selectValueFromDropdown(By by, String value)
     {
         Select select = new Select(driver.findElement(by));
-        //select.selectByVisibleText(value);
-        select.selectByIndex(2);
+
+       select.selectByVisibleText(value);
+       // select.selectByIndex(2);
 
     }
 
@@ -90,10 +96,10 @@ public class Utils extends BasePage {
         try
         {
             driver.findElement(by).click();
-        }
-        catch(ElementClickInterceptedException e)
+
+        }catch(ElementClickInterceptedException e)
         {
-            throw e;
+            System.out.println("Error Message" + e.getMessage());
         }
     }
 }

@@ -1,7 +1,9 @@
 package PageObjectModel;
 
-import org.junit.Test;
+
 import org.openqa.selenium.By;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class TestSuit extends BaseTest
 {
@@ -10,17 +12,6 @@ public class TestSuit extends BaseTest
 
     public void userShouldBeAbleToNavigateToHomePage()
     {
-        homePage.verifyUserIsOnHomePage();
-        assertCurrentURL("https://demo.nopcommerce.com/");
-    }
 
-    public void userShouldBeAbleToSelectDesiredCurrency()
-    {
-        homePage.selectEuroCurrency();
-    }
-
-    public void checkPrice()
-    {
-        homePage.priceForDesiredCurrency();
     }
 }

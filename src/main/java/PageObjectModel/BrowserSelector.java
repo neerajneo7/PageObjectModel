@@ -14,7 +14,8 @@ public class BrowserSelector extends Utils
 
     public void setUpBrowser()
     {
-        String browser = loadProp.getProperty("browser");
+        String browser = System.getProperty("browser");
+        //String browser = loadProp.getProperty("browser");
 
         if (browser.equalsIgnoreCase(("chrome")))
         {
@@ -49,6 +50,7 @@ public class BrowserSelector extends Utils
             InternetExplorerOptions options = new InternetExplorerOptions();
             options.setCapability(InternetExplorerDriver.IE_SWITCHES, "-private");
             options.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+            options.setCapability("initialBrowserUrl", "<your-initial-url-that-will-be-loaded>");
             driver = new InternetExplorerDriver(options);
             driver.manage().window().maximize();
             // this is to manage your Implicity wait for 20 seconds
